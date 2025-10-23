@@ -1,0 +1,39 @@
+/* .boton{
+    background-color: blueviolet;
+    color: black;
+    border: gray;
+    cursor: pointer;
+}
+
+#miboto{
+    background-color: green;
+    color: black;
+    border: gray;
+} 
+
+
+button{
+    background-color: blue;
+    color: black;
+    border: gray;
+    cursor: pointer;
+}
+button:hover{
+    background-color: red;
+}*/
+
+.prueba{
+    background: linear-gradient(135deg, #fb836e, #a777e3);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 25px; 
+    border: none;
+    border-radius: 12px;
+    cursor: pointer; 
+}
+
+.prueba:hover{
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #a777e3, #fb836e);
+}
