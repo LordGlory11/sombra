@@ -34,15 +34,15 @@
     
     function seleccionar($query, $datos){
         $con = pg_connect("host=localhost port=5432 user=postgres password=3310904323 dbname=crud");
-        
+
         $respuesta = pg_prepare($con, "select", $query);
         $respuesta2 = pg_execute($con, "select", $datos);
         
-        // Usa pg_fetch_all para obtener todos los resultados
+       
         $resultados = pg_fetch_all($respuesta2);
         
         pg_close($con);
         return $resultados;
     }
-    //seleccionar("select stock from productos",[]);
+   
 ?>
