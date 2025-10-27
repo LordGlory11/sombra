@@ -9,37 +9,39 @@
       require 'bd.php';
     ?>
 </head>
-<body>
+<body >
   
-    <table class="table">
+    <table class="table" >
   <caption>List of users</caption>
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Codigo</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Edad</th>
+      <th scope="col">Grado</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    <?php
+                
+                $query = "SELECT id_alumno, nombre, edad, grado FROM Alumnos"; 
+                $resultados = seleccionar($query, []);
+
+                
+                if ($resultados) {
+                    
+                    foreach ($resultados as $index => $alumno) {
+                        echo "<tr>";
+                        echo "<th scope='row'>" . ($index + 1) . "</th>"; 
+                        echo "<td>" . htmlspecialchars($alumno['nombre']) . "</td>"; 
+                        echo "<td>" . htmlspecialchars($alumno['edad']) . "</td>";
+                        echo "<td>" . htmlspecialchars($alumno['grado']) . "</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='4'>No se encontraron alumnos</td></tr>"; 
+                }
+            ?>
   </tbody>
 </table>
 </body>
