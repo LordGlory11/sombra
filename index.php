@@ -13,6 +13,16 @@
       $query = "DELETE FROM Alumnos WHERE id_alumno = $1";
       eliminar($query, [$id]);
       }
+
+      if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['guardar'])) {
+          $nombre = $_POST['nombre'];
+          $edad = $_POST['edad'];
+          $grado = $_POST['grado'];
+
+          $query = "INSERT INTO Alumnos (nombre, edad, grado) VALUES ($1, $2, $3)";
+          insertar($query, [$nombre, $edad, $grado]);
+      }
+
     ?>
 </head>
 <body >
@@ -59,7 +69,12 @@
   </tbody>
 </table>
 
-<button type="button" class="btn btn-outline-success">Agregar</button>
+<div class="text-center mt-3">
+  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#agregarModal">
+    Agregar
+  </button>
+</div>
+
 
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -84,6 +99,41 @@
   </div>
 </div>
 
+  <div class="modal fade" id="agregarModal" tabindex="-1" role="dialog" aria-labelledby="agregarModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form method="POST" action=""> 
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="agregarModalLabel">Agregar Alumno</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="col-7">
+              <input type="text" class="form-control" name="nombre" placeholder="Nombre" required>
+            </div>
+            <div class="col">
+              <input type="number" class="form-control" name="edad" placeholder="Edad" required>
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" name="grado" placeholder="Grado" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-outline-success" name="guardar">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
@@ -91,9 +141,9 @@
 
     <script>
   $('#confirmDeleteModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget); // botón que abrió el modal
-    var idAlumno = button.data('id'); // obtiene el id del alumno
-    $('#idAlumnoEliminar').val(idAlumno); // pasa el id al input hidden
+    var button = $(event.relatedTarget); 
+    var idAlumno = button.data('id'); 
+    $('#idAlumnoEliminar').val(idAlumno); 
   });
 </script>
 
